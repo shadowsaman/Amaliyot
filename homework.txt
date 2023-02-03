@@ -1,0 +1,9 @@
+
+
+Homework
+1. Login unique
+2. login va password tekshiring
+3. CRUD order olishlik uchun token jonatadi. 
+    Va siz shuni tekshirish uchun middelaware yozasiz.
+4. Vaqti tugasa xato jonatasiz. 403
+5. tokenni yangilash uchun Refresh API chiqasiz

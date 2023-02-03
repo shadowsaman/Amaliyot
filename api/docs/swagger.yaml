@@ -1,0 +1,695 @@
+definitions:
+  models.CreateSubscription:
+    properties:
+      duration:
+        type: integer
+      duration_type:
+        type: string
+      free_trial:
+        type: integer
+      is_active:
+        type: boolean
+      price:
+        type: number
+      title_en:
+        type: string
+      title_ru:
+        type: string
+      title_uz:
+        type: string
+    type: object
+  models.CreateUser:
+    properties:
+      email:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+      phone:
+        type: string
+    type: object
+  models.CreateUserSubscription:
+    properties:
+      subscription_id:
+        type: string
+      user_id:
+        type: string
+    type: object
+  models.GetListSubscriptionResponse:
+    properties:
+      Subscriptions:
+        items:
+          $ref: '#/definitions/models.Subscription'
+        type: array
+      count:
+        type: integer
+    type: object
+  models.GetListUserResponse:
+    properties:
+      count:
+        type: integer
+      users:
+        items:
+          $ref: '#/definitions/models.User'
+        type: array
+    type: object
+  models.GetListUserSubscriptionResponse:
+    properties:
+      count:
+        type: integer
+      user_subscription:
+        items:
+          $ref: '#/definitions/models.UserSubscription'
+        type: array
+    type: object
+  models.GetSubscriptionByUserId:
+    properties:
+      purchased:
+        $ref: '#/definitions/models.Subscription'
+      unpuchsed:
+        items:
+          $ref: '#/definitions/models.Subscription'
+        type: array
+    type: object
+  models.Subscription:
+    properties:
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      duration_type:
+        type: string
+      free_trial:
+        type: integer
+      id:
+        type: string
+      is_active:
+        type: boolean
+      price:
+        type: number
+      suration:
+        type: integer
+      title_en:
+        type: string
+      title_ru:
+        type: string
+      title_uz:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.UpdateSubscriptionSwagger:
+    properties:
+      duration_type:
+        type: string
+      free_trial:
+        type: integer
+      is_active:
+        type: boolean
+      price:
+        type: number
+      suration:
+        type: integer
+      title_en:
+        type: string
+      title_ru:
+        type: string
+      title_uz:
+        type: string
+    type: object
+  models.UpdateUserSwagger:
+    properties:
+      email:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+      phone:
+        type: string
+    type: object
+  models.User:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      first_name:
+        type: string
+      id:
+        type: string
+      last_name:
+        type: string
+      phone:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.UserHistory:
+    properties:
+      end_date:
+        type: string
+      id:
+        type: string
+      price:
+        type: number
+      start_date:
+        type: string
+      status:
+        type: string
+      user_subscription_id:
+        type: string
+    type: object
+  models.UserSubscription:
+    properties:
+      created_at:
+        type: string
+      free_trial_end_date:
+        type: string
+      free_trial_start_date:
+        type: string
+      id:
+        type: string
+      send_notification:
+        type: boolean
+      status:
+        type: string
+      subscription_id:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /Subscription/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Update Subscription
+      operationId: update_Subscription
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: CreateSubscriptionRequestBody
+        in: body
+        name: Subscription
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateSubscriptionSwagger'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetSubscriptionsBody
+          schema:
+            $ref: '#/definitions/models.Subscription'
+        "400":
+          description: Invalid Argument
+          schema:
+            type: string
+        "500":
+          description: Server Error
+          schema:
+            type: string
+      summary: Update Subscription
+      tags:
+      - Subscription
+  /has-access/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Has Access UserSubscription
+      operationId: has_access
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: HasAcces
+          schema:
+            type: string
+        "400":
+          description: Invalid Argument
+          schema:
+            type: string
+        "500":
+          description: Server Error
+          schema:
+            type: string
+      summary: Has Access UserSubscription
+      tags:
+      - UserSubscription
+  /make-active/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Make Active UserSubscription
+      operationId: make_active
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetUserHistoryBody
+          schema:
+            $ref: '#/definitions/models.UserHistory'
+        "400":
+          description: Invalid Argument
+          schema:
+            type: string
+        "500":
+          description: Server Error
+          schema:
+            type: string
+      summary: Make Active UserSubscription
+      tags:
+      - UserSubscription
+  /subscription:
+    get:
+      consumes:
+      - application/json
+      description: Get List Subscription
+      operationId: get_list_subscription
+      parameters:
+      - description: offset
+        in: query
+        name: offset
+        type: string
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetSubscriptionBody
+          schema:
+            $ref: '#/definitions/models.GetListSubscriptionResponse'
+        "400":
+          description: Invalid Argument
+          schema:
+            type: string
+        "500":
+          description: Server Error
+          schema:
+            type: string
+      summary: Get List Subscription
+      tags:
+      - Subscription
+    post:
+      consumes:
+      - application/json
+      description: Create Subscription
+      operationId: create_subscription
+      parameters:
+      - description: CreateSubscriptionRequestBody
+        in: body
+        name: Subscription
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateSubscription'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: GetSubscriptionBody
+          schema:
+            $ref: '#/definitions/models.Subscription'
+        "400":
+          description: Invalid Argument
+          schema:
+            type: string
+        "500":
+          description: Server Error
+          schema:
+            type: string
+      summary: Create Subscription
+      tags:
+      - Subscription
+  /subscription/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete By Id Subscription
+      operationId: delete_by_id_subscription
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetSubscriptionBody
+          schema:
+            $ref: '#/definitions/models.Subscription'
+        "400":
+          description: Invalid Argument
+          schema:
+            type: string
+        "500":
+          description: Server Error
+          schema:
+            type: string
+      summary: Delete By Id Subscription
+      tags:
+      - Subscription
+    get:
+      consumes:
+      - application/json
+      description: Get By Id Subscription
+      operationId: get_by_id_subscription
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetSubscriptionBody
+          schema:
+            $ref: '#/definitions/models.Subscription'
+        "400":
+          description: Invalid Argument
+          schema:
+            type: string
+        "500":
+          description: Server Error
+          schema:
+            type: string
+      summary: Get By Id Subscription
+      tags:
+      - Subscription
+  /user:
+    get:
+      consumes:
+      - application/json
+      description: Get List User
+      operationId: get_list_User
+      parameters:
+      - description: offset
+        in: query
+        name: offset
+        type: string
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetUserBody
+          schema:
+            $ref: '#/definitions/models.GetListUserResponse'
+        "400":
+          description: Invalid Argument
+          schema:
+            type: string
+        "500":
+          description: Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Get List User
+      tags:
+      - User
+    post:
+      consumes:
+      - application/json
+      description: Create User
+      operationId: create_User
+      parameters:
+      - description: CreateUserRequestBody
+        in: body
+        name: User
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateUser'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: GetUserBody
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Invalid Argument
+          schema:
+            type: string
+        "500":
+          description: Server Error
+          schema:
+            type: string
+      summary: Create User
+      tags:
+      - User
+  /user-id-subscription/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get By User Id UserSubscription
+      operationId: get_by_user_id_subscription
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetUserSubscriptionBodyByUserId
+          schema:
+            $ref: '#/definitions/models.GetSubscriptionByUserId'
+        "400":
+          description: Invalid Argument
+          schema:
+            type: string
+        "500":
+          description: Server Error
+          schema:
+            type: string
+      summary: Get By User Id UserSubscription
+      tags:
+      - UserSubscription
+  /user-subscription:
+    get:
+      consumes:
+      - application/json
+      description: Get List UserSubscription
+      operationId: get_list_user_subscription
+      parameters:
+      - description: offset
+        in: query
+        name: offset
+        type: string
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetUserSubscriptionBody
+          schema:
+            $ref: '#/definitions/models.GetListUserSubscriptionResponse'
+        "400":
+          description: Invalid Argument
+          schema:
+            type: string
+        "500":
+          description: Server Error
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: Get List UserSubscription
+      tags:
+      - UserSubscription
+    post:
+      consumes:
+      - application/json
+      description: Create UserSubscription
+      operationId: create_user_subscription
+      parameters:
+      - description: CreateUserSubscriptionRequestBody
+        in: body
+        name: UserSubscription
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateUserSubscription'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: GetUserSubscriptionBody
+          schema:
+            $ref: '#/definitions/models.UserSubscription'
+        "400":
+          description: Invalid Argument
+          schema:
+            type: string
+        "500":
+          description: Server Error
+          schema:
+            type: string
+      summary: Create UserSubscription
+      tags:
+      - UserSubscription
+  /user-subscription/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get By Id UserSubscription
+      operationId: get_by_id_user_subscription
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetUserSubscriptionBody
+          schema:
+            $ref: '#/definitions/models.UserSubscription'
+        "400":
+          description: Invalid Argument
+          schema:
+            type: string
+        "500":
+          description: Server Error
+          schema:
+            type: string
+      summary: Get By Id UserSubscription
+      tags:
+      - UserSubscription
+  /user/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete By Id User
+      operationId: delete_by_id_User
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetUserBody
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Invalid Argument
+          schema:
+            type: string
+        "500":
+          description: Server Error
+          schema:
+            type: string
+      summary: Delete By Id User
+      tags:
+      - User
+    get:
+      consumes:
+      - application/json
+      description: Get By Id User
+      operationId: get_by_id_User
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetUserBody
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Invalid Argument
+          schema:
+            type: string
+        "500":
+          description: Server Error
+          schema:
+            type: string
+      summary: Get By Id User
+      tags:
+      - User
+    put:
+      consumes:
+      - application/json
+      description: Update User
+      operationId: update_User
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: CreateUserRequestBody
+        in: body
+        name: User
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateUserSwagger'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: GetUsersBody
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Invalid Argument
+          schema:
+            type: string
+        "500":
+          description: Server Error
+          schema:
+            type: string
+      summary: Update User
+      tags:
+      - User
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
