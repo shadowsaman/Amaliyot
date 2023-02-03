@@ -232,7 +232,7 @@ paths:
         in: path
         name: id
         required: true
-        type: boolean
+        type: string
       produces:
       - application/json
       responses:
@@ -262,7 +262,7 @@ paths:
         in: path
         name: id
         required: true
-        type: boolean
+        type: string
       produces:
       - application/json
       responses:

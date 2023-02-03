@@ -181,7 +181,7 @@ func (h *HandlerV1) GetUserSubscriptionList(c *gin.Context) {
 // @Tags UserSubscription
 // @Accept json
 // @Produce json
-// @Param id path bool true "id"
+// @Param id path string true "id"
 // @Success 200 {object} string "HasAcces"
 // @Response 400 {object} string "Invalid Argument"
 // @Failure 500 {object} string "Server Error"
@@ -195,8 +195,8 @@ func (h *HandlerV1) HasAccess(c *gin.Context) {
 	)
 
 	if err != nil {
-		log.Printf("error whiling user subscription: %v\n", err)
-		c.JSON(http.StatusInternalServerError, errors.New("error whiling user-subscription-get-by-user-id").Error())
+		log.Printf("error whiling user subscription has access: %v\n", err)
+		c.JSON(http.StatusInternalServerError, errors.New("error whiling user-subscription-has-access").Error())
 		return
 	}
 
@@ -215,7 +215,7 @@ func (h *HandlerV1) HasAccess(c *gin.Context) {
 // @Tags UserSubscription
 // @Accept json
 // @Produce json
-// @Param id path bool true "id"
+// @Param id path string true "id"
 // @Success 200 {object} models.UserHistory "GetUserHistoryBody"
 // @Response 400 {object} string "Invalid Argument"
 // @Failure 500 {object} string "Server Error"

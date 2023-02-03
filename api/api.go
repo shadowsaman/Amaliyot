@@ -43,8 +43,8 @@ func SetUpApi(cfg *config.Config, r *gin.Engine, storage storage.StorageI) {
 	r.GET("/user-subscription/:id", handlerV1.GetUserSubscriptionById)
 	r.GET("/user-subscription", handlerV1.GetUserSubscriptionList)
 	r.GET("/user-id-subscription/:id", handlerV1.GetUserSubscriptionByUserId)
-	r.GET("/has-acces/:id", handlerV1.HasAccess)
-	r.GET("/make-access/:id", handlerV1.MakeActive)
+	r.GET("/has-access/:id", handlerV1.HasAccess)
+	r.GET("/make-active/:id", handlerV1.MakeActive)
 	// r.PUT("/user-subscription/:id", handlerV1.UpdateSubscription)
 	// r.DELETE("/usersubscription/:id", handlerV1.DeleteSubscription)
 

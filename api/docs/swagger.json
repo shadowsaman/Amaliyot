@@ -74,7 +74,7 @@
                 "operationId": "has_access",
                 "parameters": [
                     {
-                        "type": "boolean",
+                        "type": "string",
                         "description": "id",
                         "name": "id",
                         "in": "path",
@@ -119,7 +119,7 @@
                 "operationId": "make_active",
                 "parameters": [
                     {
-                        "type": "boolean",
+                        "type": "string",
                         "description": "id",
                         "name": "id",
                         "in": "path",

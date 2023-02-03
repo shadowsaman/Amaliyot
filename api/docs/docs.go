@@ -86,7 +86,7 @@ const docTemplate = `{
                 "operationId": "has_access",
                 "parameters": [
                     {
-                        "type": "boolean",
+                        "type": "string",
                         "description": "id",
                         "name": "id",
                         "in": "path",
@@ -131,7 +131,7 @@ const docTemplate = `{
                 "operationId": "make_active",
                 "parameters": [
                     {
-                        "type": "boolean",
+                        "type": "string",
                         "description": "id",
                         "name": "id",
                         "in": "path",
